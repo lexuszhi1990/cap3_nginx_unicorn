@@ -1,10 +1,11 @@
-source 'https://rubygems.org'
+# source 'https://rubygems.org'
+source 'http://ruby.taobao.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# Use postgresql as the database for Active Record
+gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -23,18 +24,30 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
-# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring',        group: :development
-
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-# Use unicorn as the app server
-# gem 'unicorn'
+group :development do
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/jonleighton/spring
+  gem 'spring'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+  # Livereload
+  gem 'guard-livereload', require: false
+  gem 'rack-livereload'
 
-# Use debugger
-# gem 'debugger', group: [:development, :test]
+  # i18n extractor
+  gem 'i18n-tasks', '~> 0.3.2'
 
+  # Deploy tool
+  gem 'capistrano', '~> 3.1.0'
+  # gem 'capistrano-rvm', '~> 0.1.1'
+  gem 'capistrano-rbenv', '~> 2.0.2'
+  gem 'capistrano-bundler', '~> 1.1.2'
+  gem 'capistrano-rails', '~> 1.0.0'
+
+  gem 'unicorn' # Use unicorn as the app server
+end
+
+group :development, :test do
+  gem 'factory_girl_rails', '~> 4.3.0'
+end
