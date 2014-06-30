@@ -1,3 +1,7 @@
+# set rails env, or will cause
+# ActiveRecord::AdapterNotSpecified: '' database is not configured. Available: ["default", "development", "test", "production"]
+set :rails_env, 'production'
+
 # Simple Role Syntax
 # ==================
 # Supports bulk-adding hosts to roles, the primary
