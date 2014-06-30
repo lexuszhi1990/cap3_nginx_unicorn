@@ -41,6 +41,9 @@ set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rben
 set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 set :rbenv_roles, :all # default value
 
+# set ssh commands
+SSHKit.config.command_map[:unicorn_rails] = "/home/deploy/.rbenv/shims/unicorn_rails"
+
 namespace :deploy do
 
   desc 'Restart application'
@@ -64,4 +67,25 @@ namespace :deploy do
 
   after :finishing, 'deploy:cleanup'
 
+end
+
+namespace :unicorn do
+
+  desc 'Start Unicorn'
+  task :start do
+    on roles(:app) do
+      within current_path do
+        execute :unicorn_rails, "-c config/unicorn.rb -E #{fetch(:rails_env)} -D"
+      end
+    end
+  end
+
+  desc "stop Unicorn"
+  task :stop do
+    on roles(:app) do
+      within current_path do
+        execute("cat tmp/pids/unicorn.pid | xargs kill -9")
+      end
+    end
+  end
 end
