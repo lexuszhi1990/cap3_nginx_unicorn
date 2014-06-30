@@ -14,16 +14,16 @@ set :deploy_to, "/var/www/#{fetch(:application)}"
 set :scm, :git
 
 # Default value for :format is :pretty
-set :format, :pretty
+# set :format, :pretty
 
 # Default value for :log_level is :debug
-set :log_level, :debug
+# set :log_level, :debug
 
 # Default value for :pty is false
 # set :pty, true
 
 # Default value for :linked_files is []
-# set :linked_files, %w{config/database.yml}
+# set :linked_files, %w{config/database.yml config/application.yml config/secrets.yml}
 
 # Default value for linked_dirs is []
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
@@ -61,5 +61,7 @@ namespace :deploy do
       # end
     end
   end
+
+  after :finishing, 'deploy:cleanup'
 
 end
