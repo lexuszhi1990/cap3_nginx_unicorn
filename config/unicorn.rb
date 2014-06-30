@@ -2,7 +2,7 @@ rails_dir = "/var/www/cap3_nginx_uncorn/current"
 
 worker_processes 4
 
-working_directory Rails.root
+working_directory rails_dir
 
 listen "#{rails_dir}/tmp/sockets/cap3.socket", :backlog => 64
 
