@@ -1,23 +1,17 @@
-module Rails
-  class <<self
-    def root
-      File.expand_path(__FILE__).split('/')[0..-3].join('/')
-    end
-  end
-end
+rails_dir = "/var/www/cap3_nginx_uncorn/current"
 
 worker_processes 4
 
 working_directory Rails.root
 
-listen "#{Rails.root}/tmp/sockets/cap3.socket", :backlog => 64
+listen "#{rails_dir}/tmp/sockets/cap3.socket", :backlog => 64
 
 timeout 30
 
-pid "#{Rails.root}/tmp/pids/unicorn.pid"
+pid "#{rails_dir}/tmp/pids/unicorn.pid"
 
-stderr_path "#{Rails.root}/log/unicorn.log"
-stdout_path "#{Rails.root}/log/unicorn.log"
+stderr_path "#{rails_dir}/log/unicorn.log"
+stdout_path "#{rails_dir}/log/unicorn.log"
 
 # combine Ruby 2.0.0dev or REE with "preload_app true" for memory savings
 # http://rubyenterpriseedition.com/faq.html#adapt_apps_for_cow
