@@ -1,6 +1,6 @@
 rails_dir = "/var/www/cap3_nginx_uncorn/current"
 
-worker_processes 4
+worker_processes 1
 
 working_directory rails_dir
 
